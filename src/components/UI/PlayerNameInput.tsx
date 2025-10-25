@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { validatePlayerName, sanitizeName } from '../../utils/profanityFilter';
 import './PlayerNameInput.css';
 
 interface PlayerNameInputProps {
@@ -7,14 +8,37 @@ interface PlayerNameInputProps {
 
 export const PlayerNameInput: React.FC<PlayerNameInputProps> = ({ onSubmit }) => {
   const [name, setName] = useState('');
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const trimmedName = name.trim();
-    if (trimmedName) {
-      onSubmit(trimmedName);
-    } else {
+    
+    const cleanedName = sanitizeName(name);
+    
+    // Якщо ім'я порожнє, використовуємо "Анонім"
+    if (!cleanedName) {
       onSubmit('Анонім');
+      return;
+    }
+    
+    // Валідація імені
+    const validation = validatePlayerName(cleanedName);
+    
+    if (!validation.isValid) {
+      setError(validation.error || 'Некоректне ім\'я');
+      return;
+    }
+    
+    // Якщо все ок, відправляємо
+    setError(null);
+    onSubmit(cleanedName);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
+    // Очищаємо помилку при зміні
+    if (error) {
+      setError(null);
     }
   };
 
@@ -25,12 +49,17 @@ export const PlayerNameInput: React.FC<PlayerNameInputProps> = ({ onSubmit }) =>
         <input
           type="text"
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={handleChange}
           placeholder="Ваше ім'я..."
           maxLength={20}
-          className="player-name-input"
+          className={`player-name-input ${error ? 'error' : ''}`}
           autoFocus
         />
+        {error && (
+          <div className="player-name-error">
+            ⚠️ {error}
+          </div>
+        )}
         <button type="submit" className="player-name-submit">
           ✅ Продовжити
         </button>
