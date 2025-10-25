@@ -25,43 +25,6 @@ export const GameControls: React.FC<GameControlsProps> = ({
 }) => {
   return (
     <div className="game-controls">
-      <div className="control-buttons">
-        <button
-          className="control-btn pause-btn"
-          onClick={onPause}
-          title="Пауза (ESC)"
-        >
-          {isPaused ? '▶️ Продовжити' : '⏸️ Пауза'}
-        </button>
-        
-        <button
-          className="control-btn reset-btn"
-          onClick={onReset}
-          title="Рестарт (R)"
-        >
-          🔄 Рестарт
-        </button>
-
-        {onToggleSound && (
-          <button
-            className="control-btn sound-btn"
-            onClick={onToggleSound}
-            title={isMuted ? 'Увімкнути звук' : 'Вимкнути звук'}
-          >
-            {isMuted ? '🔇 Звук' : '🔊 Звук'}
-          </button>
-        )}
-
-        {onToggleMusic && (
-          <button
-            className="control-btn music-btn"
-            onClick={onToggleMusic}
-            title={isMusicMuted ? 'Увімкнути музику' : 'Вимкнути музику'}
-          >
-            {isMusicMuted ? '🎵 Музика' : '🎶 Музика'}
-          </button>
-        )}
-      </div>
 
       {onMove && (
         <div className="direction-controls">
@@ -102,6 +65,43 @@ export const GameControls: React.FC<GameControlsProps> = ({
           </div>
         </div>
       )}
+      <div className="control-buttons">
+        <button
+          className="control-btn pause-btn"
+          onClick={onPause}
+          title="Пауза (ESC)"
+        >
+          {isPaused ? '▶️ Продовжити' : '⏸️ Пауза'}
+        </button>
+        
+        <button
+          className="control-btn reset-btn"
+          onClick={onReset}
+          title="Рестарт (R)"
+        >
+          🔄 Рестарт
+        </button>
+
+        {onToggleSound && (
+          <button
+            className="control-btn sound-btn"
+            onClick={onToggleSound}
+            title={isMuted ? 'Увімкнути звук' : 'Вимкнути звук'}
+          >
+            {isMuted ? '🔇 Звук' : '🔊 Звук'}
+          </button>
+        )}
+
+        {onToggleMusic && (
+          <button
+            className="control-btn music-btn"
+            onClick={onToggleMusic}
+            title={isMusicMuted ? 'Увімкнути музику' : 'Вимкнути музику'}
+          >
+            {isMusicMuted ? '🎵 Музика' : '🎶 Музика'}
+          </button>
+        )}
+      </div>
     </div>
   );
 };
