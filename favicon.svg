@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Background -->
+  <rect width="32" height="32" fill="#1a1a2e" rx="4"/>
+  
+  <!-- Maze walls -->
+  <g fill="#4ecca3" stroke="#4ecca3" stroke-width="1.5" stroke-linecap="round">
+    <!-- Outer border -->
+    <rect x="3" y="3" width="26" height="26" fill="none" stroke-width="2"/>
+    
+    <!-- Maze pattern -->
+    <line x1="8" y1="3" x2="8" y2="13"/>
+    <line x1="3" y1="8" x2="13" y2="8"/>
+    <line x1="13" y1="8" x2="13" y2="18"/>
+    <line x1="8" y1="13" x2="18" y2="13"/>
+    <line x1="18" y1="3" x2="18" y2="13"/>
+    <line x1="13" y1="18" x2="23" y2="18"/>
+    <line x1="23" y1="8" x2="23" y2="23"/>
+    <line x1="18" y1="23" x2="29" y2="23"/>
+    <line x1="3" y1="18" x2="8" y2="18"/>
+    <line x1="8" y1="18" x2="8" y2="29"/>
+    <line x1="8" y1="23" x2="13" y2="23"/>
+    <line x1="18" y1="13" x2="23" y2="13"/>
+  </g>
+  
+  <!-- Player (red dot) -->
+  <circle cx="5.5" cy="5.5" r="1.5" fill="#ff6b6b"/>
+  
+  <!-- Exit (green dot) -->
+  <circle cx="26.5" cy="26.5" r="1.5" fill="#51cf66"/>
+</svg>
