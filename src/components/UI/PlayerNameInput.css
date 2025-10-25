@@ -1,0 +1,91 @@
+.player-name-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+  width: 90%;
+}
+
+.player-name-title {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  color: #333;
+  margin: 0;
+  text-align: center;
+}
+
+.player-name-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+.player-name-input {
+  padding: 15px 20px;
+  font-size: 1.1rem;
+  border: 3px solid #667eea;
+  border-radius: 12px;
+  outline: none;
+  transition: all 0.3s ease;
+  text-align: center;
+  font-weight: 500;
+}
+
+.player-name-input:focus {
+  border-color: #764ba2;
+  box-shadow: 0 0 0 3px rgba(118, 75, 162, 0.2);
+}
+
+.player-name-input::placeholder {
+  color: #999;
+}
+
+.player-name-submit {
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.player-name-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.6);
+}
+
+.player-name-submit:active {
+  transform: translateY(0);
+}
+
+.player-name-hint {
+  font-size: 0.9rem;
+  color: #666;
+  text-align: center;
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .player-name-container {
+    padding: 20px;
+  }
+
+  .player-name-input {
+    padding: 12px 15px;
+    font-size: 1rem;
+  }
+
+  .player-name-submit {
+    padding: 12px 25px;
+    font-size: 1rem;
+  }
+}
