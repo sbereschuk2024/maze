@@ -6,8 +6,8 @@ export interface LeaderboardEntry {
   id: string;
   playerName: string;
   time: number; // Час у секундах
-  moves: number; // Кількість ходів
   date: string; // Дата проходження
+  mazeSize?: string; // Розмір лабіринту (опціонально)
 }
 
 export interface LeaderboardData {

@@ -1,5 +1,6 @@
-import React from 'react';
-import { getTopEntries, formatLeaderboardTime, formatDate } from '../../utils/leaderboard';
+import React, { useEffect, useState } from 'react';
+import { subscribeToLeaderboard } from '../../utils/firebaseLeaderboard';
+import { formatLeaderboardTime, formatDate } from '../../utils/leaderboard';
 import type { LeaderboardEntry } from '../../types/leaderboard';
 import './Leaderboard.css';
 
@@ -12,7 +13,30 @@ export const Leaderboard: React.FC<LeaderboardProps> = ({
   limit = 10,
   currentPlayerTime 
 }) => {
-  const entries = getTopEntries(limit);
+  const [entries, setEntries] = useState<LeaderboardEntry[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Підписуємось на оновлення з Firebase
+    const unsubscribe = subscribeToLeaderboard((newEntries) => {
+      setEntries(newEntries);
+      setLoading(false);
+    }, limit);
+
+    // Відписуємось при размонтуванні
+    return () => unsubscribe();
+  }, [limit]);
+
+  if (loading) {
+    return (
+      <div className="leaderboard-container">
+        <h2 className="leaderboard-title">🏆 Таблиця лідерів</h2>
+        <div className="leaderboard-empty">
+          <p>Завантаження...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (entries.length === 0) {
     return (
@@ -48,7 +72,6 @@ export const Leaderboard: React.FC<LeaderboardProps> = ({
           <div className="leaderboard-cell leaderboard-rank">#</div>
           <div className="leaderboard-cell leaderboard-name">Ім'я</div>
           <div className="leaderboard-cell leaderboard-time">Час</div>
-          <div className="leaderboard-cell leaderboard-moves">Ходи</div>
           <div className="leaderboard-cell leaderboard-date">Дата</div>
         </div>
         {entries.map((entry, index) => (
@@ -65,9 +88,6 @@ export const Leaderboard: React.FC<LeaderboardProps> = ({
             </div>
             <div className="leaderboard-cell leaderboard-time">
               ⏱️ {formatLeaderboardTime(entry.time)}
-            </div>
-            <div className="leaderboard-cell leaderboard-moves">
-              👣 {entry.moves}
             </div>
             <div className="leaderboard-cell leaderboard-date">
               📅 {formatDate(entry.date)}

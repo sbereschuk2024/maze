@@ -23,8 +23,7 @@ export const getLeaderboard = (): LeaderboardEntry[] => {
  */
 export const addLeaderboardEntry = (
   playerName: string,
-  time: number,
-  moves: number
+  time: number
 ): void => {
   try {
     const entries = getLeaderboard();
@@ -33,7 +32,6 @@ export const addLeaderboardEntry = (
       id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       playerName: playerName.trim() || 'Анонім',
       time,
-      moves,
       date: new Date().toISOString()
     };
     

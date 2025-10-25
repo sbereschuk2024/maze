@@ -6,7 +6,7 @@ import { PlayerNameInput } from '../UI/PlayerNameInput';
 import { Leaderboard } from '../UI/Leaderboard';
 import { useGameState, useKeyboard, useGameLoop, useSound, useBackgroundMusic } from '../../hooks';
 import { renderGame, calculateCellSize } from '../../utils';
-import { addLeaderboardEntry } from '../../utils/leaderboard';
+import { addFirebaseLeaderboardEntry } from '../../utils/firebaseLeaderboard';
 import type { CanvasContext, Size } from '../../types';
 
 interface MazeGameProps {
@@ -90,15 +90,24 @@ export const MazeGame: React.FC<MazeGameProps> = ({
       playSound('win');
       pauseMusic(); // Зупинити музику при перемозі
       
-      // Зберегти результат у таблицю лідерів
+      // Зберегти результат у Firebase
       if (gameState.endTime && gameState.startTime) {
         const gameTime = (gameState.endTime - gameState.startTime) / 1000;
-        addLeaderboardEntry(playerName || 'Анонім', gameTime, gameState.moves);
+        const mazeSize = `${gameState.maze[0].length}x${gameState.maze.length}`;
+        
+        addFirebaseLeaderboardEntry(
+          playerName || 'Анонім', 
+          gameTime,
+          mazeSize
+        ).catch((error) => {
+          console.error('Failed to save to Firebase:', error);
+        });
+        
         setSavedTime(gameTime);
       }
     }
     prevGameStatusRef.current = gameState.gameStatus;
-  }, [gameState.gameStatus, gameState.endTime, gameState.startTime, gameState.moves, playSound, pauseMusic, playerName]);
+  }, [gameState.gameStatus, gameState.endTime, gameState.startTime, gameState.maze, playSound, pauseMusic, playerName]);
 
   // Функція старту гри з музикою
   const handleStartGame = useCallback(() => {
