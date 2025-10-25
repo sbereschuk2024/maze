@@ -19,8 +19,8 @@ export const MazeGame: React.FC<MazeGameProps> = ({
   height = 500 
 }) => {
   const { gameState, movePlayer, togglePause, resetGame } = useGameState({
-    mazeWidth: 28,
-    mazeHeight: 22
+    mazeWidth: 24,
+    mazeHeight: 18
   });
 
   const canvasCtxRef = useRef<CanvasContext | null>(null);
@@ -174,15 +174,14 @@ export const MazeGame: React.FC<MazeGameProps> = ({
         }}>
           <h1 style={{ 
             fontSize: 'clamp(2rem, 8vw, 4rem)',
-            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            color: 'white',
             WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
             backgroundClip: 'text',
             margin: 0,
             fontWeight: 'bold',
             textShadow: '2px 2px 4px rgba(0,0,0,0.1)'
           }}>
-            🌟 Лабіринт Гра 🌟
+            🌟 Лабіринти від Захара 🌟
           </h1>
 
           <div style={{
@@ -256,12 +255,12 @@ export const MazeGame: React.FC<MazeGameProps> = ({
         // Екран гри
         <>
           <h1 style={{ 
+            color: 'white',
             marginBottom: '15px', 
-            color: '#333',
             fontSize: 'clamp(1.5rem, 5vw, 2.5rem)',
             textAlign: 'center'
           }}>
-            🌟 Лабіринт Гра 🌟
+            🌟 Лабіринти від Захара 🌟
           </h1>
           
           <GameStats gameState={gameState} />
@@ -285,12 +284,15 @@ export const MazeGame: React.FC<MazeGameProps> = ({
           />
           
           <div style={{ 
+            background: 'white',
             marginTop: '15px', 
             textAlign: 'center',
-            color: '#666',
+            color: 'rgb(221, 221, 221)',
             maxWidth: '600px',
-            padding: '0 10px',
-            fontSize: 'clamp(0.85rem, 2.5vw, 1rem)'
+            padding: '15px',
+            fontSize: 'clamp(0.85rem, 2.5vw, 1rem)',
+            backgroundColor: 'rgba(0, 0, 0, 0.3)',
+            borderRadius: '10px',
           }}>
             <p><strong>Керування:</strong></p>
             <p>⌨️ Використовуйте <strong>стрілки</strong> або <strong>WASD</strong> для руху</p>

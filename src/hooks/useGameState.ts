@@ -2,9 +2,6 @@ import { useState, useCallback, useMemo } from 'react';
 import type { GameState, GameSettings, Position, MazeCell, Player, Direction } from '../types';
 import { CellType } from '../types';
 import { 
-  generateRandomMaze, 
-  generateRecursiveBacktrackingMaze,
-  generateRoomsAndCorridorsMaze,
   generatePrimsMaze
 } from '../utils/mazeGenerators';
 
